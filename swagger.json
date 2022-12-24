@@ -1,0 +1,652 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "<p style='font-weight:bold'>This is the official API documentation for the Revon Farms Website. It describes all the api endpoints and how they can be used from the  front-end of the website</p> <h5 style='font-weight:bold'>TECHNOLOGY USED</h5> <ul><li>Language - Node.js</li><li>Framework - Express.js</li><li>Version Control - Git and Git Hub</li><li>Database - MongoDB</li><li>ORM(Object Relational Model) - Mongoose</li><li>Testing tool-Jest</li><li>Integration tool - Travis CI</li> <li>Convention - eslint</li> <li>Documentation - Swagger</li></ul>",
+        "version": "1.0.0",
+        "title": "Official API Documentation for the Revon Farms Website"
+    },
+    "host": "revonfarms.herokuapp.com",
+    "basePath": "/revonapi/v1",
+    "tags": [
+        {
+            "name": "user",
+            "description": "Endpoints related to user"
+        },
+        {
+            "name": "product",
+            "description": "Endpoints related to product"        
+        }
+
+    ],
+    "schemes": [
+        "https"
+        
+    ],
+    "paths": {
+        "/signup": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Register a user",
+                "description": "This endpoint would hanlde the signup of a user",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Signup body in JSON format",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SignUp"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User has been signup but has to validate his or her account",
+                        "schema": {
+                            "$ref": "#/definitions/SignupSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "An error occured while signing up a user",
+                        "schema": {
+                            "$ref": "#/definitions/SignupErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/SignupErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/signin": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Signin a user",
+                "description": "This endpoint will handle the signing in of a user ",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "This is what the user needs to supply in JSON format",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Signin"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/SigninSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "error",
+                        "schema": {
+
+                            "$ref": "#/definitions/SigninErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/SigninErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/forgot": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Handles forgotten password",
+                "description": "This endpoint will handle request for user who forgot their password",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Object to be passed in JSON format",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Forgot"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Password was regenerated and sent to the email of user",
+                        "schema": {
+                            "$ref": "#/definitions/ForgotSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "error",
+                        "schema": {
+
+                            "$ref": "#/definitions/ForgotErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/SigninErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/edit": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Handles editing a user details",
+                "description": "This endpoint will handle request for editing a users profile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Object to be passed in JSON format",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Edit"
+                        }
+                    }
+                ],
+                "responses": {
+                   
+                        "200": {
+                            "description": "If the oldPassword field and the newPassword field was enterd, the reponse would be ",
+                            "schema": {
+                                "$ref": "#/definitions/PassEditResponse"
+                            }
+                        },
+                        "201": {
+                            "description": "If other fields was entered and the oldPassword field and the newPassword field was not entered the updated user deatils would be returned ",
+                            "schema": {
+                                "$ref": "#/definitions/User"
+                            }
+                        },
+                        "400": {
+                            "description": "error",
+                            "schema": {
+    
+                                "$ref": "#/definitions/ForgotErrorResponse"
+                            }
+                        },
+                        "500": {
+                            "description": "internal error",
+                            "schema": {
+                                "$ref": "#/definitions/SigninErrorResponse"
+                            }
+                        }
+                    
+                }
+            }
+        },
+      "/get-user/{id}": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Get a user detail",
+                "description": "Find a user based on the id passed from client",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the user with the email",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/SigninSuccessResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "error",
+                        "schema": {
+
+                            "$ref": "#/definitions/ForgotErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/SigninErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/get-products": {
+            "get": {
+                "tags": [
+                    "product"
+                ],
+                "summary": "returns products",
+                "description": "Returns an array of products",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/Products"
+                        }
+                    },
+                    "400": {
+                        "description": "error",
+                        "schema": {
+
+                            "$ref": "#/definitions/ForgotErrorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "internal error",
+                        "schema": {
+                            "$ref": "#/definitions/SigninErrorResponse"
+                        }
+                    }
+                }
+             }
+            },
+
+            "/add-product": {
+                "post": {
+                    "tags": [
+                        "product"
+                    ],
+                    "summary": "Add product",
+                    "description": "This endpoint handles adding a product to the database",
+                    "produces": [
+                        "application/json"
+                    ],
+                    "parameters": [
+                        {
+                            "in": "body",
+                            "name": "body",
+                            "description": "Object to be passed in JSON format",
+                            "required": true,
+                            "schema": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        }
+                    ],
+                    "responses": {
+                        "200": {
+                            "description": "successful operation",
+                            "schema": {
+                                "$ref": "#/definitions/Product"
+                            }
+                        },
+                        "400": {
+                            "description": "error",
+                            "schema": {
+    
+                                "$ref": "#/definitions/ForgotErrorResponse"
+                            }
+                        },
+                        "500": {
+                            "description": "internal error",
+                            "schema": {
+                                "$ref": "#/definitions/SigninErrorResponse"
+                            }
+                        }
+                    }
+                 }
+                }
+        },
+    "definitions": {
+        "Order": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+
+                "userId": {
+                    "type": "string"
+                },
+                "orderObject": {
+                    "type": "object"
+                },
+                "totalQuantity": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "totalPrice": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "shipDate": {
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Order Status",
+                    "enum": [
+                        "placed",
+                        "approved",
+                        "delivered"
+                    ]
+                },
+                "complete": {
+                    "type": "boolean"
+                }
+            },
+            "xml": {
+                "name": "Order"
+            }
+        },
+        "Signin":{
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "xml": {
+                "name": "Signin"
+            }
+        },
+        
+        "User": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "_id":{
+                    "type":"string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "record":{
+                    "type": "array",
+                    "xml": {
+                        "wrapped": true
+                    },
+                    "items": {
+                        "$ref":"#/definitions/Order",
+                        "xml": {
+                            "name": "order"
+                        }
+                    }
+                },
+                "validMail":{
+                    "type":"boolean"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                }
+            },
+            "xml": {
+                "name": "User"
+            }
+         
+        },
+        "SignUp": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+
+                "password": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                }
+            },
+            "xml": {
+                "name": "SignUp"
+            }
+         
+        },
+        "SignupErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            },
+            "xml": {
+                "name": "SignupErrorResponse"
+            }
+         
+        },
+        "SignupSuccessResponse": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type": "string",
+                    "description":"A message sent message",
+                    "enum":[
+                        "A message has been sent to your email, please check it out to validate your email account"
+                    ]
+                }
+            },
+            "xml": {
+                "name": "SignupSuccessResponse"
+            }
+         
+        },
+        "ForgotErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            },
+            "xml": {
+                "name": "ForgotErrorResponse"
+            }
+        },
+        "ForgotSuccessResponse": {
+            "type": "object",
+            "properties": {
+                "success": {
+                    "type":"string",
+                    "enum":[
+                        "A new password has been sent to your email, kindly check it out"
+                    ]
+                }
+            },
+            "xml": {
+                "name": "ForgotSuccessResponse"
+            }
+        },
+        "SigninErrorResponse": {
+            "type": "object",
+            "properties": {
+                "error": {
+                    "type": "string"
+                }
+            },
+            "xml": {
+                "name": "SignupErrorResponse"
+            }
+         
+        },
+        "SigninSuccessResponse": {
+            "type": "object",
+            "properties": {
+                "user": {
+                    "$ref": "#/definitions/User"
+                }
+            },
+            "xml": {
+                "name": "SignupSuccessResponse"
+            }
+         
+        },
+        "Forgot": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+            },
+            "xml": {
+                "name": "Forgot"
+            }
+         
+        },
+        "Products": {
+            "type": "array",
+            "xml": {
+                "wrapped": true
+            },
+            "items": {
+                "$ref":"#/definitions/Product",
+                "xml": {
+                    "name": "Product"
+                }
+            }
+         
+        },
+        
+        "Product": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "imgUrl": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
+                }
+            },
+            "xml": {
+                "name": "Product"
+            }
+         
+        },
+        "Edit": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "address": {
+                    "type": "string"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "oldPassword": {
+                    "type": "string"
+                },
+                "newPassword": {
+                    "type": "string"
+                }
+            },
+            "xml": {
+                "name": "Edit"
+            }
+         
+        } ,
+        "PassEditResponse": {
+            "type": "object",
+            "properties": {
+                "passwordChanged": {
+                    "type": "object",
+                    "properties": {
+                        "status": {
+                            "type": "string",
+                            "description": "Password update status",
+                            "enum": [
+                                "success",
+                                "error"
+                            ]
+                        }
+
+                    }
+                },
+                "editedUser":{
+                    "type":"object",
+                    "$ref":"#/definitions/User"
+                }
+            },
+            "xml": {
+                "name": "PassEditResponse"
+            }
+         
+        }
+    }
+}

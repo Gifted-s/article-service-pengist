@@ -1,0 +1,31 @@
+{
+  "name": "revon",
+  "version": "1.0.0",
+  "description": "api for revon client",
+  "main": "local.js",
+  "scripts": {
+    "start": "node app.js",
+    "start-dev": "nodemon app.js"
+  },
+  "author": "Adewumi Sunkanmi <sunkanmiadewumi@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "dotenv": "*",
+    "express": "^4.16.4",
+    "flutterwave-node": "^1.2.0",
+    "helmet": "^3.22.0",
+    "mongodb": "^3.6.0",
+    "mongoose": "^5.9.7",
+    "nodemailer": "^4.0.1",
+    "paystack-node": "^0.2.4",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.0.0",
+    "uuid": "^7.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
