@@ -1,7 +1,7 @@
 FROM node:12-alpine
-WORKDIR /event-management-service
-COPY package.json /event-management-service
+WORKDIR /article-pengist-service
+COPY package.json /article-pengist-service
 RUN  npm install
-COPY . /event-management-service
-EXPOSE 3000
-CMD ["node", "./src/index.js"]
+COPY . /article-pengist-service
+EXPOSE 4000
+CMD ["node", "app.js"]
