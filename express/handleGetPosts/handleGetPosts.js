@@ -6,7 +6,7 @@
  * @param {Constructor} User
  */
 const handleGetPosts = function (req, res, Article) {
-  console.log("here")
+   
     // update the user eventSchedule field
     // find the user by id and execute the callback
     Article.aggregate(
