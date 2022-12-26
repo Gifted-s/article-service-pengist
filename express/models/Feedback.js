@@ -8,29 +8,35 @@ const FeedBackSchema = new Schema({
     type: String,
     required: true,
   },
+  userId: {
+    type: String,
+    required: true
+  },
   content: {
     type: String,
     required: true
   },
-  noOfRes:{
-    type:Number,
-    required:true,
-    default:0
+  noOfRes: {
+    type: Number,
+    required: true,
+    default: 0
   },
-  replies:[
+  replies: [
     {
-      reply:String,
+      userId: String,
+      authorName: String,
+      reply: String,
       datePosted: {
-        required:true,
-        type:Number,
-        default:Date.now()
+        required: true,
+        type: Number,
+        default: Date.now()
       }
     }
   ],
-  datePosted:{
+  datePosted: {
     type: Number,
-    required:true,
-    default:Date.now()
+    required: true,
+    default: Date.now()
   }
 
 })

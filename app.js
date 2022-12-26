@@ -46,6 +46,9 @@ const Category = require('./express/models/Category')
 const handleGetArticlesInCategory = require('./express/handleGetCategory/handleGetArticlesInCategory')
 const handleGetDashboardData = require('./express/handleDashboardData/handleDashboardData')
 const handleUnlike = require('./express/handleLike/handleUnlike')
+const handleDeleteFeed = require('./express/handleDeleteFeed/handleDeleteFeed')
+const Feedback = require('./express/models/Feedback')
+const handleDeleteFeedbackRes = require('./express/handleDeleteFeedbackRes/handleDeleteFeedbackRes')
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({
@@ -127,8 +130,14 @@ app.post('/post-note', (req, res) => {
 app.post('/post-feed', (req, res) => {
   handlePostFeed(req, res)
 })
+app.post('/delete-feed/:id', (req, res) => {
+  handleDeleteFeed(req, res, Feedback)
+})
 app.post('/feed-res/:id', (req, res) => {
   handleFeedBackRes(req, res)
+})
+app.post('/delete-reply/:id/:replyId', (req, res) => {
+  handleDeleteFeedbackRes(req, res, Feedback)
 })
 app.post('/post-tweet', (req, res) => {
   handlePostTweet(req, res)
