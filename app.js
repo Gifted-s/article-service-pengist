@@ -7,7 +7,7 @@ dotenv.config()
 mongoose.connect(process.env.MONGODB_CONNECTION_URL, { useUnifiedTopology: true, autoIndex: true, useNewUrlParser: true }, () => console.log('yello'))
 const swaggerUi = require('swagger-ui-express')
 const swaggerJsDoc = require('swagger-jsdoc')
- 
+
 const handleAddArticle = require('./express/handleAddArticle/addArticle')
 const handleLike = require('./express/handleLike/handleLike')
 const handleEditArticle = require('./express/handleEditArticle/editArticle')
@@ -49,6 +49,7 @@ const handleUnlike = require('./express/handleLike/handleUnlike')
 const handleDeleteFeed = require('./express/handleDeleteFeed/handleDeleteFeed')
 const Feedback = require('./express/models/Feedback')
 const handleDeleteFeedbackRes = require('./express/handleDeleteFeedbackRes/handleDeleteFeedbackRes')
+const handleFetchAllArticles = require('./express/handleFetchAllArticles/handleFetchAllArticles')
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({
@@ -61,8 +62,8 @@ app.use(`/docs`, swaggerUi.serve, swaggerUi.setup(require('./swagger.json')))
 app.post('/add-article', (req, res) => {
   handleAddArticle(req, res, Article)
 })
-app.get('/', (req,res)=>{
-  res.status(200).send({message: "Article Server up"})
+app.get('/', (req, res) => {
+  res.status(200).send({ message: "Article Server up" })
 })
 app.post('/edit', (req, res, next) => {
   handleEditArticle(req, res, Article)
@@ -171,8 +172,11 @@ app.get('/getArticlesInCategory/:id/:authorId', (req, res) => {
   handleGetArticlesInCategory(req, res, Article)
 })
 
-app.get('/getDashboardData/:id', async  (req, res) => { 
+app.get('/getDashboardData/:id', async (req, res) => {
   await handleGetDashboardData(req, res, Article)
+})
+app.get('/articles-data', (req, res) => {
+  handleFetchAllArticles(req, res, Article)
 })
 // add categories  do not uncomment 
 // Category.insertMany( [
@@ -201,7 +205,7 @@ app.get('/', (req, res) => {
   res.send('Server Started')
 });
 
- 
+
 
 
 
